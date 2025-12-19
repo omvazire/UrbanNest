@@ -1,0 +1,19 @@
+{
+  "name": "major",
+  "version": "1.0.0",
+  "description": "A major project trying to build a clone Airbnb like web page along with backend :)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "om",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^5.2.1",
+    "method-override": "^3.0.0",
+    "mongoose": "^9.0.2"
+  }
+}
