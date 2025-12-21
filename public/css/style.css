@@ -103,3 +103,16 @@ text-decoration: none !important;
     
     border: none !important;
 }
+
+
+
+
+
+.show-image{
+ height: 30vh;   
+}
+
+.show-card{
+    padding-left: 0;
+    padding-right: 0;
+}

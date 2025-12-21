@@ -1,29 +1,43 @@
 <% layout("/layouts/boilerplate") %>
+<div class="row mt-4">
+    <div class="col-8 offset-3">
 
-    <body>
-        <h3>listing details</h3>
-        <ul>
-            <li>
-                <%= foundListing.title %>
-            </li>
-            <li>
-                <%= foundListing.description %>
-            </li>
-
-            <li>
-                <%= foundListing.location %>
-            </li>
-            <li>
-                <%= foundListing.country %>
-            </li>
-            <li> &#8377; <%= foundListing.price.toLocaleString("en-IN") %>
-            </li>
-
-        </ul>
+    
+   
+        <h3>Listing details</h3>
         <br>
-        <a href="/listings/<%= foundListing._id %>/edit">Edit this</a>
-        <br> <br>
+</div>
+<div class="card col-6 offset-3 show-card">
+  <img src="<%= foundListing.image.url %>" class="card-img-top show-image" alt="Listing_image">
+  <div class="card-body">
+    <p class="card-text"><b><%= foundListing.title %></b> <br>
+        <%= foundListing.description %> <br>
+        <%= foundListing.location %> <br>
+        <%= foundListing.country %> <br>
+        &#8377; <%= foundListing.price.toLocaleString("en-IN") %>
+    
+    
+    </p>
+  </div>  
+</div>
+
+
+
+       
+        
+        
+   
+
+
+    
+</div>
+
+<div class="col-1 offset-3 mt-5">
+<a href="/listings/<%= foundListing._id %>/edit" class="btn btn-dark">Edit</a>
+        </div>
+        
+     <div class="col-1 mt-3 offset-3">
         <form action="/listings/<%= foundListing._id %>?_method=DELETE" method="post">
-            <button>delete this listing</button>
+            <button class="btn btn-danger">Delete</button>
         </form>
-    </body>
+     </div>
