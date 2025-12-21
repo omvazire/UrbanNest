@@ -1,27 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>show listing</title>
-</head>
-<body>
-    <h3>listing details</h3>
-    <ul>
-        <li><%= foundListing.title %></li>
-        <li><%= foundListing.description %></li>
-        
-        <li><%= foundListing.location %></li>
-        <li><%= foundListing.country %></li>
-        <li> &#8377; <%= foundListing.price.toLocaleString("en-IN") %></li>
+<% layout("/layouts/boilerplate") %>
 
-    </ul>
-    <br>
-    <a href="/listings/<%= foundListing._id %>/edit">Edit this</a>
-    <br> <br>
-    <form action="/listings/<%= foundListing._id %>?_method=DELETE" method="post"> 
-        <button>delete this listing</button>
-    </form>
-</body>
-</html>
+    <body>
+        <h3>listing details</h3>
+        <ul>
+            <li>
+                <%= foundListing.title %>
+            </li>
+            <li>
+                <%= foundListing.description %>
+            </li>
 
+            <li>
+                <%= foundListing.location %>
+            </li>
+            <li>
+                <%= foundListing.country %>
+            </li>
+            <li> &#8377; <%= foundListing.price.toLocaleString("en-IN") %>
+            </li>
+
+        </ul>
+        <br>
+        <a href="/listings/<%= foundListing._id %>/edit">Edit this</a>
+        <br> <br>
+        <form action="/listings/<%= foundListing._id %>?_method=DELETE" method="post">
+            <button>delete this listing</button>
+        </form>
+    </body>
