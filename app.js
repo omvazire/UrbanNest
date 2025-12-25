@@ -7,7 +7,7 @@ const methodoverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const wrapAsync = require("./utils/wrapasync.js");
 const expressError = require("./utils/expressError.js");
-const {listingSchema} = require("./schema.js");
+const { listingSchema } = require("./schema.js");
 
 
 async function main() {
@@ -33,16 +33,16 @@ app.get("/", (req, res) => {
     res.send("this is root");
 });
 
-const validateListing = (req, res, next) =>{
-let {error} = listingSchema.validate(req.body);   
-     
+const validateListing = (req, res, next) => {
+    let { error } = listingSchema.validate(req.body);
 
-     if(error){
+
+    if (error) {
         let errMsg = error.details.map((el) => el.message).join(",");
         throw new expressError(404, errMsg);
-     }else{
+    } else {
         next();
-     }
+    }
 }
 
 
@@ -50,7 +50,7 @@ let {error} = listingSchema.validate(req.body);
 
 
 //index route
-app.get("/listings", wrapAsync (async (req, res) => {
+app.get("/listings", wrapAsync(async (req, res) => {
     const allListings = await listing.find({});
     res.render("listings/index.ejs", { allListings });
 }));
@@ -63,7 +63,7 @@ app.get("/listings/new", (req, res) => {
 
 
 //show rote
-app.get("/listings/:id", wrapAsync ( async (req, res) => {
+app.get("/listings/:id", wrapAsync(async (req, res) => {
     const { id } = req.params;
     const foundListing = await listing.findById(id);
     res.render("listings/show.ejs", { foundListing });
@@ -71,30 +71,28 @@ app.get("/listings/:id", wrapAsync ( async (req, res) => {
 
 
 //creat route
-app.post("/listings",validateListing, wrapAsync( async (req, res) => {
-     
-        const newListing = new listing(req.body.listing);
+app.post("/listings", validateListing, wrapAsync(async (req, res) => {
+    const newListing = new listing(req.body.listing);
     await newListing.save();
     res.redirect("/listings");
     console.log(newListing);
 })
-   
-    
 );
 
 
 
 //edit route
-app.get("/listings/:id/edit", wrapAsync( async (req, res) => {
+app.get("/listings/:id/edit", wrapAsync(async (req, res) => {
     const { id } = req.params;
     console.log(id);
     const listing2 = await listing.findById(id);
     res.render("listings/edit.ejs", { listing2 });
 }));
 
-//update route
 
-app.put("/listings/:id",validateListing, wrapAsync( async (req, res) => {
+
+//update route
+app.put("/listings/:id", validateListing, wrapAsync(async (req, res) => {
     let { id } = req.params;
     await listing.findByIdAndUpdate(id, { ...req.body.listing });
     res.redirect(`/listings/${id}`);
@@ -102,8 +100,9 @@ app.put("/listings/:id",validateListing, wrapAsync( async (req, res) => {
 }));
 
 
+
 //delete route
-app.delete("/listings/:id", wrapAsync( async (req, res) => {
+app.delete("/listings/:id", wrapAsync(async (req, res) => {
     let { id } = req.params;
     let deletedListing = await listing.findByIdAndDelete(id);
     console.log(deletedListing);
@@ -131,23 +130,27 @@ app.delete("/listings/:id", wrapAsync( async (req, res) => {
 
 
 
-app.use((req,res, next) =>{
-next(new expressError(404, "page not found!!!"));
+
+
+
+
+app.use((req, res, next) => {
+    next(new expressError(404, "page not found!!!"));
 });
 
 
 
-app.use((err, req, res, next) =>{
-let {statusCode = 500, message = "Something went wrong!!!"} = err ;
+app.use((err, req, res, next) => {
+    let { statusCode = 500, message = "Something went wrong!!!" } = err;
 
-res.status(statusCode).render("error.ejs", {message});
+    res.status(statusCode).render("error.ejs", { message });
 
 
-// res.status(statusCode).send(message);
+    // res.status(statusCode).send(message);
 });
 
 
 
 app.listen(3000, () => {
-    console.log("app listning to port 5566");
+    console.log("app listning to port 3000");
 });
