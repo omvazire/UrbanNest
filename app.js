@@ -22,6 +22,7 @@ app.use(methodoverride("_method"));
 app.engine('ejs', ejsMate);
 app.use(express.static(path.join(__dirname, "/public")));
 
+
 main()
     .then(() => {
         console.log("connected to DB");
@@ -30,6 +31,9 @@ main()
         console.log(err);
     });
 
+
+
+
 app.get("/", (req, res) => {
     res.send("this is root");
 });
@@ -37,12 +41,7 @@ app.get("/", (req, res) => {
 
 
 
-
-
-
-
 app.use("/listings", listings);
-
 app.use("/listings/:id/reviews", reviews)
 
 
@@ -58,11 +57,7 @@ app.use((req, res, next) => {
 
 app.use((err, req, res, next) => {
     let { statusCode = 500, message = "Something went wrong!!!" } = err;
-
     res.status(statusCode).render("error.ejs", { message });
-
-
-    // res.status(statusCode).send(message);
 });
 
 
@@ -70,3 +65,7 @@ app.use((err, req, res, next) => {
 app.listen(3000, () => {
     console.log("app listning to port 3000");
 });
+
+
+
+//learned cookies basic after express routers
