@@ -18,17 +18,33 @@ secret: "supersecret", resave: false, saveUninitialized: true
 app.use(session(sessionOption));
 app.use(flash());
 
+
+app.use((req,res,next)=>{
+    res.locals.successMsg = req.flash("success");
+  res.locals.errorMsg = req.flash("error");
+  next();
+});
+
 app.get("/register", (req,res) =>{
     let {name = "anonymous"} = req.query;
     req.session.name = name;
     console.log(req.session.name);
-   req.flash("success", "user registered succesfully");
+
+    if(name === "anonymous"){
+    req.flash("error", "some error occured");
+    }
+    else{
+        req.flash("success", "user registered succesfully");
+    }
+   
+    
+
     res.redirect("/hello");
 });
 
 app.get("/hello", (req,res) =>{
   
-   res.render("page.ejs", {name: req.session.name, msg: req.flash("success")})
+   res.render("page.ejs", {name: req.session.name})
 });
 
 

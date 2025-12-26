@@ -5,6 +5,8 @@ const path = require("path");
 const methodoverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const expressError = require("./utils/expressError.js");
+const session = require("express-session");
+const flash = require("connect-flash");
 
 const listings = require("./routes/listing.js");
 const reviews = require("./routes/review.js");
@@ -23,13 +25,16 @@ app.engine('ejs', ejsMate);
 app.use(express.static(path.join(__dirname, "/public")));
 
 
-main()
-    .then(() => {
-        console.log("connected to DB");
-    })
-    .catch((err) => {
-        console.log(err);
-    });
+const sessionOptions = {
+    secret : "supersecret",
+    resave: false,
+    saveUninitialized: true,
+    cookie:{
+        expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
+        maxAge: 7 * 24 * 60 * 60 * 1000,
+        httpOnly: true,
+    },
+};
 
 
 
@@ -40,9 +45,30 @@ app.get("/", (req, res) => {
 
 
 
+app.use(session(sessionOptions));
+app.use(flash());
+
+
+main()
+    .then(() => {
+        console.log("connected to DB");
+    })
+    .catch((err) => {
+        console.log(err);
+    });
+
+
+app.use((req,res,next)=>{
+    res.locals.success = req.flash("success");
+    res.locals.error = req.flash("error");
+    next();
+});
+
+
+
 
 app.use("/listings", listings);
-app.use("/listings/:id/reviews", reviews)
+app.use("/listings/:id/reviews", reviews);
 
 
 
