@@ -116,7 +116,9 @@ app.use("/listings/:id/reviews", reviewRouter);
 app.use("/", userRouter);
 
 
-
+app.get("/privacy-terms", (req,res)=>{
+    res.render("privacyTerms");
+});
 
 
 
@@ -131,11 +133,6 @@ app.use((err, req, res, next) => {
     res.status(statusCode).render("error.ejs", { message });
 });
 
-
-
-app.get("/privacy-terms", (req,res)=>{
-    res.render("privacyTerms");
-});
 
 
 app.listen(3000, () => {
