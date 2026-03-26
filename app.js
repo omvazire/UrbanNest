@@ -133,6 +133,11 @@ app.use((err, req, res, next) => {
 
 
 
+app.get("/privacy-terms", (req,res)=>{
+    res.render("privacyTerms");
+});
+
+
 app.listen(3000, () => {
     console.log("app listning to port 3000");
 });
