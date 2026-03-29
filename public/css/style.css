@@ -128,4 +128,47 @@ text-decoration: none !important;
     color: #fa2e3c;
 }
 
+/* Dark Mode Theme */
+body.dark-mode {
+    background-color: #1e1e1e !important;
+    color: #cccccc !important;
+}
 
+body.dark-mode .navbar {
+    background-color: #1e1e1e !important;
+    border-color: #333 !important;
+}
+
+body.dark-mode .f-info {
+    background-color: #252526 !important;
+    color: #cccccc !important;
+}
+
+body.dark-mode .nav-link,
+body.dark-mode .f-info-links a {
+    color: #cccccc !important;
+}
+
+body.dark-mode .card,
+body.dark-mode .listing-card {
+    background-color: #1e1e1e !important;
+    color: #cccccc !important;
+}
+
+body.dark-mode .card-img-overlay:hover {
+    background-color: rgba(30, 30, 30, 0.4) !important;
+}
+
+body.dark-mode .form-control {
+    background-color: #2d2d2d !important;
+    color: #cccccc !important;
+    border-color: #444 !important;
+}
+
+body.dark-mode input::placeholder {
+    color: #888 !important;
+}
+
+body.dark-mode .border-bottom {
+    border-bottom-color: #333 !important;
+}
